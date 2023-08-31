@@ -8,6 +8,6 @@ public class NoticeController {
 
     @GetMapping("hello")
     public String joinForm() {
-        return "notice/noticeWrite";
+        return "user/userInformation";
     }
 }

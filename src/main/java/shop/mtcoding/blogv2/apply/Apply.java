@@ -1,5 +1,6 @@
 package shop.mtcoding.blogv2.apply;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,9 @@ public class Apply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column
+    private Boolean status;
+
     @ManyToOne
     private Resume resume;
 
@@ -32,8 +36,9 @@ public class Apply {
     private Notice notice;
 
     @Builder
-    public Apply(Integer id, Resume resume, Notice notice) {
+    public Apply(Integer id, Boolean status, Resume resume, Notice notice) {
         this.id = id;
+        this.status = status;
         this.resume = resume;
         this.notice = notice;
     }
