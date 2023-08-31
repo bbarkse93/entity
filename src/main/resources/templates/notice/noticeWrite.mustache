@@ -1,30 +1,36 @@
 {{> layout/header}}
 
 <div class="addResume">
-  <h1>이력서 작성</h1>
-  <h4 class="mt-4">이력서 제목</h4>
+  <h1>채용공고 등록</h1>
+  <h4 class="mt-4">공고 제목</h4>
 
-  <input type="text" class="form-control input" id="resumeTitle" placeholder="Title" />
+  <input type="text" class="form-control input" id="recruitTitle" placeholder="Title" />
 
   <!--이미지 파일 삽입
     이미지파일과 이름, 이메일, 전화번호 나란히 정렬-->
 
   <div class=".container-fluid d-flex">
-    <div class="profile-image2" style="margin-top: 20px; margin-right: 20px">
-      <img class="image3" src="/images/다운로드.jpg" alt="프로필 사진" />
+    <div class="profile-image" style="margin-top: 20px; margin-right: 20px">
+      <img class="image2" src="/images/너굴맨.jpg" alt="프로필 사진" />
     </div>
-    <div class="info2">
-      <h4 class="mt-3">이름</h4>
-      <input type="text" class="form-control input" id="userName" placeholder="userName" />
+    <div class="recruit-info">
+      <h4 class="mt-3">회사명</h4>
+      <input type="text" class="form-control input" id="coName" placeholder="coName" />
       <h4 class="mt-3">이메일</h4>
-      <input type="text" class="form-control input" id="userEmail" placeholder="userEmail" />
+      <input type="text" class="form-control input" id="coEmail" placeholder="coEmail" />
       <h4 class="mt-3">전화번호</h4>
-      <input type="text" class="form-control input" id="userCallNumber" placeholder="userCallNumber" />
+      <input type="text" class="form-control input" id="coCallNumber" placeholder="coCallNumber" />
     </div>
   </div>
-  <hr />
 
-  <h4 class="mt-4">희망 직무</h4>
+  <hr />
+  <h4 class="mt-4">기업정보</h4>
+  <input type="text" class="form-control input" id="coInfo" placeholder="coInfo" />
+  <h4 class="mt-4">지역</h4>
+  <input type="text" class="form-control input" id="place" placeholder="이 자리는 체크박스 자리야!" />
+
+  <hr />
+  <h4 class="mt-4">채용직무</h4>
   <p>선택한 직무: <span id="selectedDevOptions">None</span></p>
   <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" id="devDropdownButton" data-bs-toggle="dropdown"
@@ -72,7 +78,7 @@
     </ul>
   </div>
   <h4 class="mt-4">기술 스택</h4>
-  <p>보유 기술: <span id="selectedTechOptions">None</span></p>
+  <p>필요한 기술: <span id="selectedTechOptions">None</span></p>
   <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" id="techDropdownButton" data-bs-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
@@ -81,7 +87,7 @@
     <ul class="dropdown-menu" aria-labelledby="techDropdownButton">
       <li>
         <label><input type="checkbox" class="dropdown-checkbox" value="기술1" />
-          기술1</label>대우긴
+          기술1</label>
       </li>
       <li>
         <label><input type="checkbox" class="dropdown-checkbox" value="기술2" />
@@ -119,77 +125,64 @@
     </ul>
   </div>
   <hr />
-  <h4 class="mt-4">자기소개서</h4>
-  <input type="text" class="form-control input" placeholder="내용을 입력해주세요" />
-
-  <h4 class="mt-4">학력</h4>
-  <div class="form-check">
-    <input type="radio" class="form-check-input education-option" name="education" value="고등학교졸업">
-    <label class="form-check-label">고등학교졸업</label>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mt-4">
+        <h4>모집인원</h4>
+        <input type="text" class="form-control input" placeholder="모집 인원을 기입해주세요" />
+        <h4 class="mt-4">급여</h4>
+        <input type="text" class="form-control input" placeholder="연봉,급여를 등록해주세요" />
+      </div>
+      <div class="col-lg-6 mt-4">
+        <h4>기간</h4>
+        <input type="text" class="form-control input" placeholder="모집 기간을 등록해주세요" />
+        <h4 class="mt-4">자격요건</h4>
+        <input type="text" class="form-control input" id="place" placeholder="사지멀쩡한 자" />
+      </div>
+    </div>
   </div>
-  <div class="form-check">
-    <input type="radio" class="form-check-input education-option" name="education" value="대학교중퇴">
-    <label class="form-check-label">대학교중퇴</label>
-  </div>
-  <div class="form-check">
-    <input type="radio" class="form-check-input education-option" name="education" value="대학교졸업">
-    <label class="form-check-label">대학교졸업</label>
-  </div>
-  <div class="form-check">
-    <input type="radio" class="form-check-input education-option" name="education" value="대학원졸업">
-    <label class="form-check-label">대학원졸업</label>
-  </div>
-
-
   <div class="d-flex justify-content-center mt-5">
-    <button type="button" class="btn btn-primary" style="width: 50%" id="saveButton">
+    <button type="button" class="btn btn-primary" style="width: 50%">
       저장
     </button>
   </div>
+</div>
 
-  <script>
-    function setupDropdown(dropdownId, outputId) {
-      var dropdown = document.querySelector(`#${dropdownId}`);
-      var dropdownItems =
-        dropdown.nextElementSibling.querySelectorAll(".dropdown-checkbox");
+<script>
+  function setupDropdown(dropdownId, outputId) {
+    var dropdown = document.querySelector(`#${dropdownId}`);
+    var dropdownItems =
+      dropdown.nextElementSibling.querySelectorAll(".dropdown-checkbox");
 
-      dropdown.addEventListener("click", function () {
-        dropdownItems.forEach(function (item) {
-          item.addEventListener("change", function () {
-            updateSelectedOptions(outputId, dropdownItems);
-          });
+    dropdown.addEventListener("click", function () {
+      dropdownItems.forEach(function (item) {
+        item.addEventListener("change", function () {
+          updateSelectedOptions(outputId, dropdownItems);
         });
-      });
-    }
-
-    function updateSelectedOptions(outputId, checkboxList) {
-      var selectedOptions = Array.from(checkboxList)
-        .filter(function (checkbox) {
-          return checkbox.checked;
-        })
-        .map(function (checkbox) {
-          return checkbox.value;
-        });
-
-      var output = document.getElementById(outputId);
-      if (selectedOptions.length > 0) {
-        output.textContent = selectedOptions.join(", ");
-      } else {
-        output.textContent = "None";
-      }
-    }
-
-    // Setup Dropdowns
-    setupDropdown("devDropdownButton", "selectedDevOptions");
-    setupDropdown("techDropdownButton", "selectedTechOptions");
-
-    $(document).ready(function () {
-      $(".education-option").click(function () {
-        const selectedEducation = $("input[name='education']:checked").val();
-        alert("선택된 학력: " + selectedEducation);
       });
     });
+  }
 
-  </script>
+  function updateSelectedOptions(outputId, checkboxList) {
+    var selectedOptions = Array.from(checkboxList)
+      .filter(function (checkbox) {
+        return checkbox.checked;
+      })
+      .map(function (checkbox) {
+        return checkbox.value;
+      });
 
-  {{> layout/footer}}
+    var output = document.getElementById(outputId);
+    if (selectedOptions.length > 0) {
+      output.textContent = selectedOptions.join(", ");
+    } else {
+      output.textContent = "None";
+    }
+  }
+
+  // Setup Dropdowns
+  setupDropdown("devDropdownButton", "selectedDevOptions");
+  setupDropdown("techDropdownButton", "selectedTechOptions");
+</script>
+
+{{> layout/footer}}
